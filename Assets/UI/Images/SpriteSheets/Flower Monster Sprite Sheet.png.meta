@@ -1,0 +1,1297 @@
+fileFormatVersion: 2
+guid: a94142ca3256a0948a74e7f8eaee69e4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5158334040586423688
+    second: Flower Monster Sprite Sheet_0
+  - first:
+      213: 6477398257032302360
+    second: Flower Monster Sprite Sheet_1
+  - first:
+      213: 2275301001955097250
+    second: Flower Monster Sprite Sheet_2
+  - first:
+      213: 7189647795792344739
+    second: Flower Monster Sprite Sheet_3
+  - first:
+      213: 1717518666256569127
+    second: Flower Monster Sprite Sheet_4
+  - first:
+      213: -7409442630159691753
+    second: Flower Monster Sprite Sheet_5
+  - first:
+      213: -247351651085049255
+    second: Flower Monster Sprite Sheet_6
+  - first:
+      213: -5103139792447617168
+    second: Flower Monster Sprite Sheet_7
+  - first:
+      213: 1364256633064980125
+    second: Flower Monster Sprite Sheet_8
+  - first:
+      213: -5948008024733914002
+    second: Flower Monster Sprite Sheet_9
+  - first:
+      213: 92218163117199209
+    second: Flower Monster Sprite Sheet_10
+  - first:
+      213: 2700964267998285359
+    second: Flower Monster Sprite Sheet_11
+  - first:
+      213: 8252195911414161410
+    second: Flower Monster Sprite Sheet_12
+  - first:
+      213: -5343396354468237171
+    second: Flower Monster Sprite Sheet_13
+  - first:
+      213: -6022630017116828562
+    second: Flower Monster Sprite Sheet_14
+  - first:
+      213: -1813926886579740122
+    second: Flower Monster Sprite Sheet_15
+  - first:
+      213: -4033727418543160823
+    second: Flower Monster Sprite Sheet_16
+  - first:
+      213: 959635552013690742
+    second: Flower Monster Sprite Sheet_17
+  - first:
+      213: 2725255755547910645
+    second: Flower Monster Sprite Sheet_18
+  - first:
+      213: -1276753332756985102
+    second: Flower Monster Sprite Sheet_19
+  - first:
+      213: -1242028545208473885
+    second: Flower Monster Sprite Sheet_20
+  - first:
+      213: 4572179014470376391
+    second: Flower Monster Sprite Sheet_21
+  - first:
+      213: -1147244864491162042
+    second: Flower Monster Sprite Sheet_22
+  - first:
+      213: -6619689321311992075
+    second: Flower Monster Sprite Sheet_23
+  - first:
+      213: 4721691924093786222
+    second: Flower Monster Sprite Sheet_24
+  - first:
+      213: 4987924103976788100
+    second: Flower Monster Sprite Sheet_25
+  - first:
+      213: 7629492325013349604
+    second: Flower Monster Sprite Sheet_26
+  - first:
+      213: -8941892509927546227
+    second: Flower Monster Sprite Sheet_27
+  - first:
+      213: 7235041746580542459
+    second: Flower Monster Sprite Sheet_28
+  - first:
+      213: -1612853694026678686
+    second: Flower Monster Sprite Sheet_29
+  - first:
+      213: 3687969147923846462
+    second: Flower Monster Sprite Sheet_30
+  - first:
+      213: -427285063574993191
+    second: Flower Monster Sprite Sheet_31
+  - first:
+      213: -6793831402766281923
+    second: Flower Monster Sprite Sheet_32
+  - first:
+      213: 2452089474089070169
+    second: Flower Monster Sprite Sheet_33
+  - first:
+      213: 1961742388372911962
+    second: Flower Monster Sprite Sheet_34
+  - first:
+      213: 2218464326483656260
+    second: Flower Monster Sprite Sheet_35
+  - first:
+      213: -3314805135045220850
+    second: Flower Monster Sprite Sheet_36
+  - first:
+      213: 990610984207425081
+    second: Flower Monster Sprite Sheet_37
+  - first:
+      213: -6327481945554381550
+    second: Flower Monster Sprite Sheet_38
+  - first:
+      213: -3776347410864358419
+    second: Flower Monster Sprite Sheet_39
+  - first:
+      213: -5716694382507380047
+    second: Flower Monster Sprite Sheet_40
+  - first:
+      213: -1455045774908958577
+    second: Flower Monster Sprite Sheet_41
+  - first:
+      213: -2212014471981865297
+    second: Flower Monster Sprite Sheet_42
+  - first:
+      213: -7852173844866045358
+    second: Flower Monster Sprite Sheet_43
+  - first:
+      213: -4647552637147765341
+    second: Flower Monster Sprite Sheet_44
+  - first:
+      213: -6407060562152017409
+    second: Flower Monster Sprite Sheet_45
+  - first:
+      213: -1773433324357211629
+    second: Flower Monster Sprite Sheet_46
+  - first:
+      213: -2361022318329345451
+    second: Flower Monster Sprite Sheet_47
+  - first:
+      213: -3323971258040005853
+    second: Flower Monster Sprite Sheet_48
+  - first:
+      213: 4150976844151144821
+    second: Flower Monster Sprite Sheet_49
+  - first:
+      213: 192602753110757114
+    second: Flower Monster Sprite Sheet_50
+  - first:
+      213: 7166115441714849053
+    second: Flower Monster Sprite Sheet_51
+  - first:
+      213: 2027250762907375403
+    second: Flower Monster Sprite Sheet_52
+  - first:
+      213: -7815598814204768125
+    second: Flower Monster Sprite Sheet_53
+  - first:
+      213: -7592120143580256987
+    second: Flower Monster Sprite Sheet_54
+  - first:
+      213: 6287173964061871157
+    second: Flower Monster Sprite Sheet_55
+  - first:
+      213: 5343036838249815663
+    second: Flower Monster Sprite Sheet_56
+  - first:
+      213: -7232064996904525169
+    second: Flower Monster Sprite Sheet_57
+  - first:
+      213: 321213249011866870
+    second: Flower Monster Sprite Sheet_58
+  - first:
+      213: -2875697579296282757
+    second: Flower Monster Sprite Sheet_59
+  - first:
+      213: 6795574824532320903
+    second: Flower Monster Sprite Sheet_60
+  - first:
+      213: 5509888115705254495
+    second: Flower Monster Sprite Sheet_61
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8727a06258ae968b0800000000000000
+      internalID: -5158334040586423688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81f0523656754e950800000000000000
+      internalID: 6477398257032302360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aabf9ac43e739f10800000000000000
+      internalID: 2275301001955097250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a67f50f392c6c360800000000000000
+      internalID: 7189647795792344739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723535d802ad5d710800000000000000
+      internalID: 1717518666256569127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71012bd4f2f5c2990800000000000000
+      internalID: -7409442630159691753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952287edbfa319cf0800000000000000
+      internalID: -247351651085049255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077cff775610e29b0800000000000000
+      internalID: -5103139792447617168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9efe4cfd20dee210800000000000000
+      internalID: 1364256633064980125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6cef84273e647da0800000000000000
+      internalID: -5948008024733914002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96f80764eef974100800000000000000
+      internalID: 92218163117199209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2e8f0101b0cb7520800000000000000
+      internalID: 2700964267998285359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 200a5cc9570b58270800000000000000
+      internalID: 8252195911414161410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80bdcd735178d5b0800000000000000
+      internalID: -5343396354468237171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6c8520a8e15b6ca0800000000000000
+      internalID: -6022630017116828562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62262e47b13a3d6e0800000000000000
+      internalID: -1813926886579740122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9024bf0d8425508c0800000000000000
+      internalID: -4033727418543160823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 677ac9f337f415d00800000000000000
+      internalID: 959635552013690742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1a58fabad02d520800000000000000
+      internalID: 2725255755547910645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa493fbb9f084ee0800000000000000
+      internalID: -1276753332756985102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e624f16e9d63cee0800000000000000
+      internalID: -1242028545208473885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb9007d694a37f30800000000000000
+      internalID: 4572179014470376391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646fc95cfda2410f0800000000000000
+      internalID: -1147244864491162042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f680c782a32224a0800000000000000
+      internalID: -6619689321311992075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e68d072d9c1d68140800000000000000
+      internalID: 4721691924093786222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4802520ab8aa83540800000000000000
+      internalID: 4987924103976788100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e46df8c8d661e960800000000000000
+      internalID: 7629492325013349604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d82ea0e632408e380800000000000000
+      internalID: -8941892509927546227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf31e08b228086460800000000000000
+      internalID: 7235041746580542459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26efcdc4c1efd99e0800000000000000
+      internalID: -1612853694026678686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e35d99c766c4e2330800000000000000
+      internalID: 3687969147923846462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d648cf9f7af11af0800000000000000
+      internalID: -427285063574993191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33d83e955677b1a0800000000000000
+      internalID: -6793831402766281923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ead8c8262970220800000000000000
+      internalID: 2452089474089070169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a573bc7fe42893b10800000000000000
+      internalID: 1961742388372911962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e3fee0d8199ce10800000000000000
+      internalID: 2218464326483656260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e062df1da427ff1d0800000000000000
+      internalID: -3314805135045220850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e9840117b5fbd00800000000000000
+      internalID: 990610984207425081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2159888e1b44038a0800000000000000
+      internalID: -6327481945554381550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debb6faa908b79bc0800000000000000
+      internalID: -3776347410864358419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b23d295fb83aa0b0800000000000000
+      internalID: -5716694382507380047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flower Monster Sprite Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f885e9ea393aecbe0800000000000000
+      internalID: -1455045774908958577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 844e7fc6765381046a493c6ea8f439e4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Flower Monster Sprite Sheet_0: -5158334040586423688
+      Flower Monster Sprite Sheet_1: 6477398257032302360
+      Flower Monster Sprite Sheet_10: 92218163117199209
+      Flower Monster Sprite Sheet_11: 2700964267998285359
+      Flower Monster Sprite Sheet_12: 8252195911414161410
+      Flower Monster Sprite Sheet_13: -5343396354468237171
+      Flower Monster Sprite Sheet_14: -6022630017116828562
+      Flower Monster Sprite Sheet_15: -1813926886579740122
+      Flower Monster Sprite Sheet_16: -4033727418543160823
+      Flower Monster Sprite Sheet_17: 959635552013690742
+      Flower Monster Sprite Sheet_18: 2725255755547910645
+      Flower Monster Sprite Sheet_19: -1276753332756985102
+      Flower Monster Sprite Sheet_2: 2275301001955097250
+      Flower Monster Sprite Sheet_20: -1242028545208473885
+      Flower Monster Sprite Sheet_21: 4572179014470376391
+      Flower Monster Sprite Sheet_22: -1147244864491162042
+      Flower Monster Sprite Sheet_23: -6619689321311992075
+      Flower Monster Sprite Sheet_24: 4721691924093786222
+      Flower Monster Sprite Sheet_25: 4987924103976788100
+      Flower Monster Sprite Sheet_26: 7629492325013349604
+      Flower Monster Sprite Sheet_27: -8941892509927546227
+      Flower Monster Sprite Sheet_28: 7235041746580542459
+      Flower Monster Sprite Sheet_29: -1612853694026678686
+      Flower Monster Sprite Sheet_3: 7189647795792344739
+      Flower Monster Sprite Sheet_30: 3687969147923846462
+      Flower Monster Sprite Sheet_31: -427285063574993191
+      Flower Monster Sprite Sheet_32: -6793831402766281923
+      Flower Monster Sprite Sheet_33: 2452089474089070169
+      Flower Monster Sprite Sheet_34: 1961742388372911962
+      Flower Monster Sprite Sheet_35: 2218464326483656260
+      Flower Monster Sprite Sheet_36: -3314805135045220850
+      Flower Monster Sprite Sheet_37: 990610984207425081
+      Flower Monster Sprite Sheet_38: -6327481945554381550
+      Flower Monster Sprite Sheet_39: -3776347410864358419
+      Flower Monster Sprite Sheet_4: 1717518666256569127
+      Flower Monster Sprite Sheet_40: -5716694382507380047
+      Flower Monster Sprite Sheet_41: -1455045774908958577
+      Flower Monster Sprite Sheet_5: -7409442630159691753
+      Flower Monster Sprite Sheet_6: -247351651085049255
+      Flower Monster Sprite Sheet_7: -5103139792447617168
+      Flower Monster Sprite Sheet_8: 1364256633064980125
+      Flower Monster Sprite Sheet_9: -5948008024733914002
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
