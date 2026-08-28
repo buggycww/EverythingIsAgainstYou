@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.ProjectAuditor.Editor.Core;
 using UnityEngine;
 
+// test
+
 namespace Cainos.PixelArtTopDown_Basic
 {
     public class PlayerController : MonoBehaviour
@@ -30,7 +32,7 @@ namespace Cainos.PixelArtTopDown_Basic
             Walk_RightUp
         }
 
-        private bool isDead = false;
+        public bool isDead { get; private set; } = false;
 
         private void Start()
         {
