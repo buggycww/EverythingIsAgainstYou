@@ -11,7 +11,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image portrait;
     [SerializeField] private Button[] options;
-    
+
     private Animator animator;
 
     [Header("Dialogue Settings")]
@@ -22,6 +22,9 @@ public class DialogueSystem : MonoBehaviour
     private Queue<bool> autoProgressLines;
     private bool isDialogueActive;
     private bool isTyping;
+    private Coroutine typingCoroutine;
+    private string currentLineText;
+    private bool isSkipping;
 
     public static event Action OnDialogueComplete;
     public static event Action OnOption1Clicked;
@@ -45,6 +48,7 @@ public class DialogueSystem : MonoBehaviour
         instance.animator.Play("SlideIn");
 
         instance.dialogueQueue.Clear();
+        instance.autoProgressLines.Clear();
 
         for (int i = 0; i < dialogue.dialogueLines.Length; i++)
         {
@@ -67,10 +71,25 @@ public class DialogueSystem : MonoBehaviour
         instance.ShowNextLine();
 
         instance.isDialogueActive = true;
+        instance.isSkipping = false;
     }
 
     public void ShowNextLine()
     {
+        // Stop any ongoing typing coroutine
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        // If there was a skipped line, make sure we show the full text
+        if (isSkipping && !string.IsNullOrEmpty(currentLineText))
+        {
+            dialogueText.text = currentLineText;
+            isSkipping = false;
+        }
+
         if (dialogueQueue.Count == 0)
         {
             instance.animator.Play("SlideOut");
@@ -81,20 +100,42 @@ public class DialogueSystem : MonoBehaviour
 
         var line = dialogueQueue.Dequeue();
         bool autoProgress = autoProgressLines.Dequeue();
-        StartCoroutine(TypeText(line, autoProgress));
+        typingCoroutine = StartCoroutine(TypeText(line, autoProgress));
     }
 
     private IEnumerator TypeText(string text, bool autoProgress)
     {
         isTyping = true;
+        isSkipping = false;
+        currentLineText = text;
         dialogueText.text = "";
+
         foreach (char c in text)
         {
+            // Check if space was pressed to skip
+            if (isSkipping)
+            {
+                // Skip to the end of the line
+                dialogueText.text = text;
+                isTyping = false;
+                isSkipping = false;
+                currentLineText = "";
+
+                // If auto-progress, wait, then continue
+                if (autoProgress)
+                {
+                    yield return new WaitForSeconds(1.5f);
+                    ShowNextLine();
+                }
+                yield break;
+            }
+
             dialogueText.text += c;
             yield return new WaitForSeconds(typeSpeed);
         }
 
         isTyping = false;
+        currentLineText = "";
 
         if (autoProgress)
         {
@@ -105,9 +146,21 @@ public class DialogueSystem : MonoBehaviour
 
     private void Update()
     {
-        if (isDialogueActive && !isTyping && Input.GetKeyDown(KeyCode.Space))
+        if (!isDialogueActive) return;
+
+        // Skip typing with Space
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            ShowNextLine();
+            if (isTyping)
+            {
+                // Skip the current typing animation
+                isSkipping = true;
+            }
+            else
+            {
+                // Go to next line if not typing
+                ShowNextLine();
+            }
         }
     }
 
@@ -116,6 +169,14 @@ public class DialogueSystem : MonoBehaviour
         OnOption1Clicked?.Invoke();
         instance.animator.Play("SlideOut");
         isDialogueActive = false;
+
+        // Stop any ongoing typing
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
         OnDialogueComplete?.Invoke();
     }
 
@@ -124,6 +185,14 @@ public class DialogueSystem : MonoBehaviour
         OnOption2Clicked?.Invoke();
         instance.animator.Play("SlideOut");
         isDialogueActive = false;
+
+        // Stop any ongoing typing
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
         OnDialogueComplete?.Invoke();
     }
 }

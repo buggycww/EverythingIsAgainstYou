@@ -13,7 +13,9 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private Animator animator;
         private Rigidbody2D rigidbody;
+        private SpriteRenderer spriteRenderer;
         private Vector2 lastDirection = Vector2.down;
+        private Color originalColor;
 
         // Map directions to animation states
         private enum DirectionState
@@ -36,8 +38,18 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void Start()
         {
+            transform.position = RespawnManager.Instance.RespawnPosition;
+            Camera.main.transform.position = new Vector3(RespawnManager.Instance.RespawnPosition.x, 
+                RespawnManager.Instance.RespawnPosition.y,
+                    Camera.main.transform.position.z);
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
+            {
+                originalColor = spriteRenderer.color;
+            }
         }
 
         private void Update()
@@ -86,7 +98,81 @@ namespace Cainos.PixelArtTopDown_Basic
             isDead = true;
             rigidbody.linearVelocity = Vector3.zero;
             animator.Play("Death_Down");
+
+            // Reset color to original before death
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = originalColor;
+            }
+
             GameManager.instance.PlayerDead();
+        }
+
+        /// <summary>
+        /// Deals damage to the player 5 times with visual feedback, then kills the player.
+        /// </summary>
+        public void DamagePlayerAndKill()
+        {
+            if (isDead) return;
+            StartCoroutine(DamageCoroutine());
+        }
+
+        private IEnumerator DamageCoroutine()
+        {
+            int damageCount = 5;
+            float damageInterval = 0.2f; // Time between each damage instance
+            float flashDuration = 0.1f; // How long each flash lasts
+
+            rigidbody.linearVelocity = Vector3.zero;
+
+            // Store the current facing direction for animation
+            string currentAnim = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+
+            // Play hurt animation if available, otherwise use current
+            if (animator.HasState(0, Animator.StringToHash("Hurt")))
+            {
+                animator.Play("Hurt");
+            }
+
+            for (int i = 0; i < damageCount; i++)
+            {
+                // Flash red
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.color = Color.red;
+                }
+
+                // Play hurt sound/effect (optional)
+                // AudioManager.Play("PlayerHurt");
+
+                // Wait for flash duration
+                yield return new WaitForSeconds(flashDuration);
+
+                // Return to original color
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.color = originalColor;
+                }
+
+                // Shake effect (optional) - small random displacement
+                Vector3 originalPos = transform.position;
+                transform.position += new Vector3(
+                    Random.Range(-0.1f, 0.1f),
+                    Random.Range(-0.1f, 0.1f),
+                    0
+                );
+                yield return new WaitForSeconds(0.05f);
+                transform.position = originalPos;
+
+                // Wait before next damage instance
+                if (i < damageCount - 1)
+                {
+                    yield return new WaitForSeconds(damageInterval);
+                }
+            }
+
+            // After all damage instances, kill the player
+            Die();
         }
 
         private void SetAnimation(Vector2 dir, bool isMoving)

@@ -27,7 +27,7 @@ public class InventoryUI : MonoBehaviour
     public void ShowItemPopUp(Item item)
     {
         this.itemName.text = item.Name;
-        this.itemName.text = item.Description;
+        this.itemDescription.text = item.Description;
         this.itemIcon.sprite = item.Icon;
         itemPopUpBox.SetActive(true);
     }

@@ -1,6 +1,7 @@
 using Cainos.PixelArtTopDown_Basic;
 using System.Collections;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Trader : NPC
@@ -17,6 +18,7 @@ public class Trader : NPC
     [SerializeField] private Item cursedKey;
     [SerializeField] private Item normalKey;
     [SerializeField] private InventoryUI inventoryUI;
+    private bool isPlayerBehind = false;
 
     public override void Awake()
     {
@@ -27,10 +29,39 @@ public class Trader : NPC
     private void Start()
     {
         inventoryUI.OnItemPopUpClosed += CursePlayer;
+        playerController = FindAnyObjectByType<PlayerController>();
+    }
+
+    private void Update()
+    {
+        CheckIsPlayerBehind();
+
+        if (isShowingText)
+        {
+            interactText.text = GetInteractionPrompt();
+        }
+    }
+
+    public void CheckIsPlayerBehind()
+    {
+        var dir = (playerController.transform.position - transform.position).normalized;
+        if (Vector2.Dot(new Vector2(dir.x, dir.y), Vector2.down) < 0)
+        {
+            isPlayerBehind = true;
+        }
+        else
+        {
+            isPlayerBehind = false;
+        }
     }
 
     public override bool IsInteractable()
     {
+        if (playerController.isDead)
+        {
+            return false;
+        }
+
         if (isInteracting)
         {
             return false;
@@ -39,12 +70,16 @@ public class Trader : NPC
         return base.IsInteractable();
     }
 
+    public override string GetInteractionPrompt()
+    {
+        if (isPlayerBehind) return "[E] Steal Key";
+        return "[E] Talk";
+    }
+
     public override void OnInteract(GameObject interactor)
     {
         if (!isShowingText)
             return;
-
-        base.OnInteract(interactor);
 
         isInteracting = true;
         HideInteractionPrompt();
@@ -53,18 +88,25 @@ public class Trader : NPC
         {
             playerController.Stop();
         }
-        DialogueSystem.StartDialogue(dialogues[giftDialogueIndex]);
-        DialogueSystem.OnOption1Clicked += GivePlayerKey;
-        DialogueSystem.OnOption2Clicked += KillPlayer;
+
+        if (isPlayerBehind)
+        {
+            StealKey();
+        }
+        else
+        {
+            DialogueSystem.StartDialogue(dialogues[giftDialogueIndex]);
+            DialogueSystem.OnOption1Clicked += GivePlayerKey;
+            DialogueSystem.OnOption2Clicked += KillPlayer;
+        }
     }
     
     public void GivePlayerKey()
     {
         Debug.Log("GivePlayerKey");
+        hasInteracted = true;
         Inventory.instance.ObtainItem(cursedKey);
         isPlayerCursed = true;
-        isInteracting = false;
-        playerController.enabled = true;
     }
 
     public void CursePlayer()
@@ -72,12 +114,16 @@ public class Trader : NPC
         if (isPlayerCursed)
         {
             Debug.Log("Player is cursed");
+            playerController.enabled = true;
+            playerController.DamagePlayerAndKill();
+            isInteracting = false;
         }
     }
 
     public void StealKey()
     {
         Debug.Log("KeyStolen");
+        hasInteracted = true;
         Inventory.instance.ObtainItem(normalKey);
         isInteracting = false;
         playerController.enabled = true;
@@ -112,6 +158,9 @@ public class Trader : NPC
 
     public override void HandleDialogueComplete()
     {
-        base.HandleDialogueComplete();  
+        base.HandleDialogueComplete();
+
+        isInteracting = false;
+        playerController.enabled = true;
     }
 }

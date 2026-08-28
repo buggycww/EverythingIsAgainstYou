@@ -6,7 +6,12 @@ public class Door : BaseInteractable
     [SerializeField] private int requiredKeyId;
     private bool isOpen;
 
-    public override bool IsInteractable() => !isOpen && !isLocked;
+    [SerializeField] private Sprite openedIcon;
+    [SerializeField] private Sprite openedShadowIcon;
+    [SerializeField] private SpriteRenderer shadowRenderer;
+    [SerializeField] private int getKeyDialogue;
+
+    public override bool IsInteractable() => !(isOpen && !isLocked);
 
     public override string GetInteractionPrompt()
     {
@@ -26,6 +31,10 @@ public class Door : BaseInteractable
                 isLocked = false;
                 OpenDoor();
             }
+            else
+            {
+                DialogueSystem.StartDialogue(dialogues[getKeyDialogue]);
+            }
         }
         else
         {
@@ -36,6 +45,8 @@ public class Door : BaseInteractable
     private void OpenDoor()
     {
         isOpen = true;
-        // Animation, sound, etc.
+        transform.GetComponent<Collider2D>().enabled = false;
+        transform.GetComponent<SpriteRenderer>().sprite = openedIcon;
+        shadowRenderer.sprite = openedShadowIcon;
     }
 }

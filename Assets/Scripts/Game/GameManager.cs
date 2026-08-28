@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     private bool canRestart;
     [SerializeField] private TextMeshProUGUI restartText;
+    [SerializeField] private Transform player;
 
     private void Awake()
     {
@@ -16,12 +17,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (canRestart)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Restart();
-            }
+            Restart();
         }
     }
 
@@ -33,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        RespawnManager.Instance.RespawnPosition = player.transform.position;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

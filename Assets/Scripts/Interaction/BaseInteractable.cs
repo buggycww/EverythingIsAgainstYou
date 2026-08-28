@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class BaseInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] protected Dialogue[] dialogues;
-    private bool hasInteracted;
+    protected bool hasInteracted;
     [SerializeField] private bool canInteractAgain = false;
     [SerializeField] private InteractType interactType;
-    [SerializeField] private TextMeshProUGUI interactText;
+    [SerializeField] protected TextMeshProUGUI interactText;
     [SerializeField] private GameObject interactionPrompt;
 
     protected bool isShowingText = false;
@@ -23,7 +23,7 @@ public class BaseInteractable : MonoBehaviour, IInteractable
     #region IInteractable
     public virtual bool IsInteractable()
     {
-        return canInteractAgain ? !hasInteracted : true;
+        return canInteractAgain ? true : !hasInteracted;
     }
 
     public virtual void OnInteract(GameObject interactor)
