@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab95d363a003719488706b6b3495ef52, type: 3}
+  m_Name: TraderDialogue - Gift
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  Name: Trader Joe
+  Portrait: {fileID: -7950320164446702114, guid: c16b84e45cc68e0448a322f21a5b18f2,
+    type: 3}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 1}
+  dialogueLines:
+  - Hi there! Would you fancy yourself a gift from me?
+  autoProgressLines: 00
+  options:
+  - Accept
+  - Decline
+  playerInteractionDialogueLines: []
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05

@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Sassy Guard
   Portrait: {fileID: -5296191648460617638, guid: e4fcbc2d915a5fb46ae98e2436d8f0b6,
     type: 3}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 0}
   dialogueLines:
   - Hah! You think I'm new to E-smashers? I've been doing this for over 40 years!
   autoProgressLines: 00

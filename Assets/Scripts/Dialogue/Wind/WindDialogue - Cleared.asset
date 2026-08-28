@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   Name: WickedWind
   Portrait: {fileID: 21300000, guid: e4736f9eb6743e246ad7d907adea7704, type: 3}
+  PortraitTint: {r: 0, g: 0.9411765, b: 1, a: 1}
   dialogueLines:
-  - Hmph. Singing the opposite tune... how original.
+  - Ugh. Singing the opposite tune, how original.
   autoProgressLines: 01
+  options: []
   playerInteractionDialogueLines: []
   voiceSound: {fileID: 0}
   voicePitch: 1

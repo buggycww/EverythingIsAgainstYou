@@ -12,7 +12,7 @@ public class Spikes : MonoBehaviour
         var playerController = other.GetComponent<PlayerController>();
         if (playerController)
         {
-            Debug.Log("KillPlayer");
+            OnPlayerKilled?.Invoke();
             playerController.Die();
         }
     }

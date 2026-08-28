@@ -1,12 +1,35 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private List<int> inventory = new List<int>();
+    public static Inventory instance;
+    public static event Action<Item> OnItemObtained;
 
-    public bool HasItem(int id) => inventory.Contains(id);
+    private void Awake()
+    {
+        instance = this;
+    }
 
-    public void obtainItem(int id) => inventory.Add(id);
+    private List<Item> inventory = new List<Item>();
+
+    public bool HasItem(int ID) => inventory.Contains(inventory.Find(i => i.id == ID));
+
+    public void ObtainItem(Item newItem)
+    {
+        inventory.Add(newItem);
+        OnItemObtained?.Invoke(newItem);
+    }
+}
+
+[System.Serializable]
+public class Item
+{
+    public int id;
+    public string Name;
+    public string Description;
+    public Sprite Icon;
 }

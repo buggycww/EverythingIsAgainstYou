@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
     [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private TMPro.TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image portrait;
+    [SerializeField] private Button[] options;
+    
     private Animator animator;
 
     [Header("Dialogue Settings")]
@@ -21,6 +24,8 @@ public class DialogueSystem : MonoBehaviour
     private bool isTyping;
 
     public static event Action OnDialogueComplete;
+    public static event Action OnOption1Clicked;
+    public static event Action OnOption2Clicked;
 
     private void Awake()
     {
@@ -32,6 +37,11 @@ public class DialogueSystem : MonoBehaviour
 
     public static void StartDialogue(Dialogue dialogue)
     {
+        foreach (var option in instance.options)
+        {
+            option.gameObject.SetActive(false);
+        }
+
         instance.animator.Play("SlideIn");
 
         instance.dialogueQueue.Clear();
@@ -42,7 +52,17 @@ public class DialogueSystem : MonoBehaviour
             instance.autoProgressLines.Enqueue(dialogue.autoProgressLines[i]);
         }
 
+        if (dialogue.options.Length > 0)
+        {
+            for (int i = 0; i < dialogue.options.Length; i++)
+            {
+                instance.options[i].transform.GetComponentInChildren<TMP_Text>().text = dialogue.options[i];
+                instance.options[i].gameObject.SetActive(true);
+            }
+        }
+
         instance.portrait.sprite = dialogue.Portrait;
+        instance.portrait.color = dialogue.PortraitTint;
         instance.typeSpeed = dialogue.typingSpeed;
         instance.ShowNextLine();
 
@@ -78,7 +98,7 @@ public class DialogueSystem : MonoBehaviour
 
         if (autoProgress)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1.5f);
             ShowNextLine();
         }
     }
@@ -89,5 +109,21 @@ public class DialogueSystem : MonoBehaviour
         {
             ShowNextLine();
         }
+    }
+
+    public void Option1Clicked()
+    {
+        OnOption1Clicked?.Invoke();
+        instance.animator.Play("SlideOut");
+        isDialogueActive = false;
+        OnDialogueComplete?.Invoke();
+    }
+
+    public void Option2Clicked()
+    {
+        OnOption2Clicked?.Invoke();
+        instance.animator.Play("SlideOut");
+        isDialogueActive = false;
+        OnDialogueComplete?.Invoke();
     }
 }

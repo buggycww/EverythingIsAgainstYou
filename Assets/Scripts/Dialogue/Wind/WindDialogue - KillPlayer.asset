@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   Name: WickedWind
   Portrait: {fileID: 21300000, guid: e4736f9eb6743e246ad7d907adea7704, type: 3}
+  PortraitTint: {r: 0, g: 0.9411765, b: 1, a: 1}
   dialogueLines:
   - I'll huff, and I'll puff, and I'll blow your brains out!
   autoProgressLines: 01

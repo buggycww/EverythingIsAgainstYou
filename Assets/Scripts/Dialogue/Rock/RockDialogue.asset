@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   Name: Rock
   Portrait: {fileID: 21300162, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 0}
   dialogueLines:
   - Yay! More fertilizer ^_^
   autoProgressLines: 01
