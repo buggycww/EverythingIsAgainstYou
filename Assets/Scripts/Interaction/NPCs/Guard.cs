@@ -2,6 +2,7 @@ using Cainos.PixelArtTopDown_Basic;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Guard : NPC
 {
@@ -16,12 +17,32 @@ public class Guard : NPC
     private Rigidbody2D rb;
     private Coroutine moveCoroutine;
     [SerializeField] private float speed = 10f;
+    private Vector2 targetPosition;
 
     public override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isDead) return;
+
+        if (isRunning)
+        {
+            if (Vector2.Distance(transform.position, targetPosition) > 0.1f)
+            {
+                Vector2 newPos = Vector2.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
+                rb.MovePosition(newPos);
+            }
+            else
+            {
+                isRunning = false;
+                rb.position = targetPosition;
+            }
+        }
     }
 
     public override void OnInteract(GameObject interactor)
@@ -45,6 +66,8 @@ public class Guard : NPC
     private IEnumerator KillPlayerAfterDelay(PlayerController controller, float delay, GameObject interactor)
     {
         yield return new WaitForSeconds(delay);
+
+        SoundManager.Instance.PlaySFX("GuardAttack");
 
         Vector2 direction = (interactor.transform.position - transform.position).normalized;
         Rigidbody2D playerRb = interactor.GetComponent<Rigidbody2D>();
@@ -70,29 +93,13 @@ public class Guard : NPC
         isRunning = true;
         DialogueSystem.StartDialogue(dialogues[screamDialogueIndex]);
         animator.Play("Walk");
-        moveCoroutine = StartCoroutine(MoveToPosition(new Vector2(escapePosition.position.x, escapePosition.position.y)));
-    }
-
-    private IEnumerator MoveToPosition(Vector2 target)
-    {
-        float stopDistance = 0.1f;
-
-        while (Vector2.Distance(transform.position, target) > stopDistance)
-        {
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.deltaTime);
-            rb.MovePosition(newPos);
-            yield return null;
-        }
-
-        rb.position = target;
-        animator.Play("Idle");
+        targetPosition = new Vector2(escapePosition.position.x, escapePosition.position.y);
     }
 
     public override void Die()
     {
         isDead = true;
         base.Die();
-        StopCoroutine(moveCoroutine);
         animator.Play("Death");
         transform.GetComponent<BoxCollider2D>().enabled = false;
     }

@@ -11,9 +11,12 @@ namespace Cainos.PixelArtTopDown_Basic
         private Animator animator;
         private Rigidbody2D rigidbody;
         private SpriteRenderer spriteRenderer;
+        public GameObject explosionVFX;
         private Vector2 lastDirection = Vector2.down;
         private Color originalColor;
         private bool isMovingToLocation;
+        private Vector3 destination;
+        private bool moveToLocationStarted = false;
 
         public bool isDead { get; private set; } = false;
 
@@ -47,13 +50,21 @@ namespace Cainos.PixelArtTopDown_Basic
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (isDead || isMovingToLocation)
+            if (isDead)
             {
                 return;
             }
 
+            // Handle move to location in FixedUpdate for physics consistency
+            if (isMovingToLocation)
+            {
+                UpdateMoveToLocation();
+                return;
+            }
+
+            // Normal movement
             Vector2 dir = Vector2.zero;
 
             if (Input.GetKey(KeyCode.A)) dir.x = -1;
@@ -76,6 +87,35 @@ namespace Cainos.PixelArtTopDown_Basic
             }
 
             rigidbody.linearVelocity = speed * dir;
+        }
+
+        private void Update()
+        {
+            // Start the move to location coroutine in Update (once)
+            if (isMovingToLocation && !moveToLocationStarted)
+            {
+                moveToLocationStarted = true;
+                StartCoroutine(MoveToLocationRoutine(destination));
+            }
+        }
+
+        private void UpdateMoveToLocation()
+        {
+            if (rigidbody == null) return;
+
+            Vector2 currentPos = transform.position;
+            Vector2 targetPos = destination;
+            float distance = Vector2.Distance(currentPos, targetPos);
+
+            if (distance <= 0.05f)
+            {
+                return;
+            }
+
+            Vector2 direction = (targetPos - currentPos).normalized;
+            rigidbody.linearVelocity = direction * speed;
+
+            SetAnimation(direction, true);
         }
 
         private void SetLayerAndSortingLayer(string sortingLayer)
@@ -106,6 +146,8 @@ namespace Cainos.PixelArtTopDown_Basic
                 return;
 
             isDead = true;
+
+            SoundManager.Instance.PlaySFX("Die");
 
             if (rigidbody != null)
             {
@@ -147,6 +189,8 @@ namespace Cainos.PixelArtTopDown_Basic
 
             for (int i = 0; i < damageCount; i++)
             {
+                SoundManager.Instance.PlaySFX("TraderCurse");
+
                 if (spriteRenderer != null)
                 {
                     spriteRenderer.color = Color.red;
@@ -186,43 +230,25 @@ namespace Cainos.PixelArtTopDown_Basic
         {
             if (isMovingToLocation) return;
             isMovingToLocation = true;
-            StartCoroutine(MoveToLocationRoutine(location));
+            moveToLocationStarted = false;
+            destination = location;
+
+            // Store the direction for animation
+            Vector2 direction = (location - transform.position).normalized;
+            lastDirection = direction;
+            SetAnimation(direction, true);
         }
 
         private IEnumerator MoveToLocationRoutine(Vector3 location)
         {
-            Vector3 startPos = transform.position;
-            Vector2 direction = (location - startPos).normalized;
-
-            lastDirection = direction;
-
-            SetAnimation(direction, true);
-
-            float distance = Vector3.Distance(startPos, location);
-            float moveSpeed = 15f;
-
+            // Wait until we've reached the destination
+            // The actual movement is handled in FixedUpdate
             while (Vector3.Distance(transform.position, location) > 0.05f)
             {
-                Vector3 newPos = Vector3.MoveTowards(transform.position, location, moveSpeed * Time.deltaTime);
-
-                if (rigidbody != null)
-                {
-                    rigidbody.MovePosition(newPos);
-                }
-                else
-                {
-                    transform.position = newPos;
-                }
-
-                Vector2 currentDir = (location - transform.position).normalized;
-                if (currentDir.magnitude > 0.1f)
-                {
-                    SetAnimation(currentDir, true);
-                }
-
                 yield return null;
             }
 
+            // Snap to exact position
             if (rigidbody != null)
             {
                 rigidbody.MovePosition(location);
@@ -233,15 +259,21 @@ namespace Cainos.PixelArtTopDown_Basic
                 transform.position = location;
             }
 
-            // Set final animation to Idle_Right (Direction 2)
-            // Since we want Idle_Right, we use a direction of (1, 0)
+            // Stop moving
+            isMovingToLocation = false;
+            moveToLocationStarted = false;
+
+            // Set final animation to Idle_Right
             Vector2 idleDirection = Vector2.right;
             SetAnimation(idleDirection, false);
             lastDirection = idleDirection;
 
             yield return new WaitForSeconds(0.1f);
 
+            // Invoke completion event
             OnMoveToLocationComplete?.Invoke();
+
+            // Deactivate the player
             gameObject.SetActive(false);
         }
 

@@ -12,7 +12,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private Button[] options;
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     [Header("Dialogue Settings")]
     [SerializeField] private float typeSpeed = 0.05f;
@@ -34,7 +34,6 @@ public class DialogueSystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        animator = dialoguePanel.GetComponent<Animator>();
         dialogueQueue = new Queue<string>();
         autoProgressLines = new Queue<bool>();
     }
@@ -186,6 +185,8 @@ public class DialogueSystem : MonoBehaviour
         }
 
         OnDialogueComplete?.Invoke();
+        OnOption1Clicked = null;
+        OnOption2Clicked = null;
     }
 
     public void Option2Clicked()
@@ -201,6 +202,8 @@ public class DialogueSystem : MonoBehaviour
             typingCoroutine = null;
         }
 
-        OnDialogueComplete?.Invoke();
+        OnDialogueComplete?.Invoke(); 
+        OnOption1Clicked = null;
+        OnOption2Clicked = null;
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   PortraitTint: {r: 1, g: 1, b: 1, a: 1}
   dialogueLines:
-  - I never said the portal would take you home ~
+  - Go on in and start all over again ~
   autoProgressLines: 01
   options: []
   playerInteractionDialogueLines: []

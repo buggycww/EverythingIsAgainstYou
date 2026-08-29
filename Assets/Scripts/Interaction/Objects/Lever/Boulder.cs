@@ -12,6 +12,7 @@ public class Boulder : MonoBehaviour
         var playerController = collision.GetComponent<PlayerController>();
         if (playerController != null && canKillPlayer)
         {
+            SoundManager.Instance.PlaySFX("Boulder");
             playerController.Die();
             boulderCollider.SetActive(true);
         }

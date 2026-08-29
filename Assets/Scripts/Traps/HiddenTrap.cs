@@ -11,6 +11,7 @@ public class HiddenTrap : MonoBehaviour
     private bool isTrapActive = false;
     [SerializeField] private bool canTrapLoop = false;
     [SerializeField] private Collider2D trapCollider;
+    [SerializeField] private string trapSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,6 +52,7 @@ public class HiddenTrap : MonoBehaviour
 
     public void OnTrapOutAnimEvent()
     {
+        SoundManager.Instance.PlaySFX(trapSound);
         trapCollider.enabled = true;
     }
 

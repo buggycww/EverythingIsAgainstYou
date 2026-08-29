@@ -1,6 +1,7 @@
 using Cainos.PixelArtTopDown_Basic;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FlowerMonster : BaseEnemy
@@ -47,7 +48,10 @@ public class FlowerMonster : BaseEnemy
     protected override void Update()
     {
         base.Update();
+    }
 
+    private void FixedUpdate()
+    {
         if (isEmerged && currentState != EnemyState.Dead && !hasAttacked)
         {
             UpdateTarget();
@@ -101,6 +105,11 @@ public class FlowerMonster : BaseEnemy
     #region Targeting
     private void UpdateTarget()
     {
+        if (currentTarget != null && currentTarget != player)//currentTarget.GetComponent<NPC>() != null)
+        {
+            return;
+        }
+
         npcSearchTimer -= Time.deltaTime;
         if (npcSearchTimer <= 0)
         {
@@ -195,6 +204,8 @@ public class FlowerMonster : BaseEnemy
 
     public override void OnDamageFrameAnimEvent()
     {
+        SoundManager.Instance.PlaySFX("FlowerAttack");
+
         if (currentTarget != null)
         {
             float dist = Vector2.Distance(transform.position, currentTarget.position);

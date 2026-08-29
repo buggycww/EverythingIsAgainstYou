@@ -12,29 +12,85 @@ public class InventoryUI : MonoBehaviour
 
     public event Action OnItemPopUpClosed;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        Inventory.OnItemObtained += ShowItemPopUp;  
+        Inventory.OnItemObtained += ShowItemPopUp;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        // Unsubscribe from events to prevent calling destroyed object
+        Inventory.OnItemObtained -= ShowItemPopUp;
+    }
+
+    private void OnDisable()
+    {
+        // Also unsubscribe when disabled (safety measure)
+        Inventory.OnItemObtained -= ShowItemPopUp;
     }
 
     public void ShowItemPopUp(Item item)
     {
-        this.itemName.text = item.Name;
-        this.itemDescription.text = item.Description;
-        this.itemIcon.sprite = item.Icon;
+        // Check if the UI elements are still valid
+        if (this == null || gameObject == null || !gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("InventoryUI is destroyed or inactive!");
+            return;
+        }
+
+        if (item == null)
+        {
+            Debug.LogWarning("Item is null!");
+            return;
+        }
+
+        // Check if itemPopUpBox is valid
+        if (itemPopUpBox == null || itemPopUpBox.gameObject == null)
+        {
+            Debug.LogWarning("Item popup box is null or destroyed!");
+            return;
+        }
+
+        // Set UI elements with null checks
+        if (itemName != null && itemName.gameObject != null)
+        {
+            itemName.text = item.Name;
+        }
+
+        if (itemDescription != null && itemDescription.gameObject != null)
+        {
+            itemDescription.text = item.Description;
+        }
+
+        if (itemIcon != null && itemIcon.gameObject != null)
+        {
+            if (item.Icon != null)
+            {
+                try
+                {
+                    itemIcon.sprite = item.Icon;
+                }
+                catch (MissingReferenceException)
+                {
+                    Debug.LogWarning("Item icon image was destroyed!");
+                    return;
+                }
+            }
+        }
+
         itemPopUpBox.SetActive(true);
     }
 
-    public void CLoseItemPopUp()
+    public void CloseItemPopUp()
     {
-        itemPopUpBox.SetActive(false);
+        // Check if still valid
+        if (this == null || gameObject == null) return;
+
+        if (itemPopUpBox != null && itemPopUpBox.gameObject != null)
+        {
+            itemPopUpBox.SetActive(false);
+        }
+
         OnItemPopUpClosed?.Invoke();
     }
 }

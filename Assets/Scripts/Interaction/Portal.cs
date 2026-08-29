@@ -11,6 +11,7 @@ public class Portal : MonoBehaviour
 
     private bool hasTeleported;
     public UnityEvent FirstTeleport;
+    [SerializeField] private bool closeOnTeleport = false;
 
     private void Start()
     {
@@ -29,6 +30,8 @@ public class Portal : MonoBehaviour
         if (Vector2.Distance(transform.position, collision.transform.position) > distance &&
             collision.GetComponent<PlayerController>())
         {
+            SoundManager.Instance.PlaySFX("Portal");
+
             if (!hasTeleported)
             {
                 FirstTeleport?.Invoke();
@@ -39,6 +42,14 @@ public class Portal : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (closeOnTeleport && other.GetComponent<PlayerController>())
+        {
+            DisablePortal();
+        }
+    }
+
     public void EnablePortal()
     {
         if (transform.GetComponent<Collider2D>().enabled == false)
@@ -46,5 +57,11 @@ public class Portal : MonoBehaviour
             transform.GetComponent<Collider2D>().enabled = true;
             transform.GetComponent<SpriteRenderer>().enabled = true;
         }
+    }
+
+    public void DisablePortal()
+    {
+        transform.GetComponent<Collider2D>().enabled = false;
+        transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

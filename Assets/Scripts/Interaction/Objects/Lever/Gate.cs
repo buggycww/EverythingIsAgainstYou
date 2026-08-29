@@ -31,6 +31,7 @@ public class Gate : MonoBehaviour
 
     public void Open()
     {
+        SoundManager.Instance.PlaySFX("DoorOpen");
         isLocked = false;
         transform.GetComponent<SpriteRenderer>().sprite = openedSprite;
         gateCollider.enabled = false;

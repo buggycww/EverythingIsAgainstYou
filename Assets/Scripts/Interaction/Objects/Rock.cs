@@ -62,6 +62,8 @@ public class Rock : BaseInteractable
         animator.Play("GrowAndFall");
 
         yield return new WaitForSeconds(1f);
+        SoundManager.Instance.PlaySFX("Rock");
+
         playerController.Die();
         DialogueSystem.StartDialogue(dialogues[moreFertilizerDialogueIndex]);
     }

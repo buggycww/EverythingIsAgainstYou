@@ -25,8 +25,7 @@ public class Door : BaseInteractable
 
         if (isLocked)
         {
-            var playerInventory = interactor.GetComponent<Inventory>();
-            if (playerInventory != null && playerInventory.HasItem(requiredKeyId))
+            if (Inventory.instance.HasItem(requiredKeyId))
             {
                 isLocked = false;
                 OpenDoor();
@@ -44,6 +43,7 @@ public class Door : BaseInteractable
 
     private void OpenDoor()
     {
+        SoundManager.Instance.PlaySFX("DoorOpen");
         isOpen = true;
         transform.GetComponent<Collider2D>().enabled = false;
         transform.GetComponent<SpriteRenderer>().sprite = openedIcon;

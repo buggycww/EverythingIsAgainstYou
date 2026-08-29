@@ -14,16 +14,21 @@ public class RespawnManager : MonoBehaviour
     [Header("Scene Management")]
     [SerializeField] private int mainMenuSceneIndex = 0;
 
+    [Header("HintSystem")]
+    public int currentIndex;
+    public int respawnCounter;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SoundManager.Instance.PlayMusic("Game");
 
             if (player != null)
             {
-                RespawnPosition = player.position;
+                SetRespawnPoint(player.position);
                 Instance.sortingLayer = player.GetComponent<SpriteRenderer>().sortingLayerName;
             }
         }
@@ -50,6 +55,8 @@ public class RespawnManager : MonoBehaviour
         {
             DestroySelf();
         }
+
+        incrementCounter();
     }
 
     private void DestroySelf()
@@ -66,9 +73,15 @@ public class RespawnManager : MonoBehaviour
     public void SetRespawnPoint(Vector3 position)
     {
         RespawnPosition = position;
-        Debug.Log($"Respawn point set to: {position}");
+        HintSystem.Instance.SetHint(position);
     }
 
+    public void incrementCounter()
+    {
+        respawnCounter++;
+
+        HintSystem.Instance.CheckHintDisplay(respawnCounter);
+    }
 
     private void OnDestroy()
     {

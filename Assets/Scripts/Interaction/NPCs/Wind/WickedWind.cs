@@ -27,9 +27,12 @@ public class WickedWind : BaseInteractable
     private bool wasPlayerControllerEnabled = false;
     private bool wasWindCleared = false;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
         SetAllWindVisuals(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -87,12 +90,10 @@ public class WickedWind : BaseInteractable
             // Re-enable PlayerController if it was enabled before
             if (playerController != null && wasPlayerControllerEnabled)
             {
+                audioSource.Stop();
                 playerController.enabled = true;
                 wasPlayerControllerEnabled = false;
-                Debug.Log("PlayerController re-enabled");
             }
-
-            // Don't reset velocity here - let the PlayerController take over
         }
     }
 
@@ -121,6 +122,7 @@ public class WickedWind : BaseInteractable
             isPlayerInRange = true;
             hasPlayerTouchedWind = true;
             wasPlayerControllerEnabled = playerController.enabled;
+            audioSource.Play();
         }
     }
 

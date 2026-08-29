@@ -7,6 +7,7 @@ public class PlayerEscape : MonoBehaviour
 
     public void OnPlayerEscaped()
     {
+        SoundManager.Instance.PlaySFX("Win");
         EndScreen.SetActive(true);
         StartCoroutine(LoadMainMenu());
     }

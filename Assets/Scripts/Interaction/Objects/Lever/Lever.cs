@@ -10,6 +10,8 @@ public class Lever : BaseInteractable
 
     public override void OnInteract(GameObject interactor)
     {
+        SoundManager.Instance.PlaySFX("Lever");
+
         base.OnInteract(interactor);
 
         HideInteractionPrompt();

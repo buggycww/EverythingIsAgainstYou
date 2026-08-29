@@ -9,7 +9,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            RespawnManager.Instance.RespawnPosition = transform.position;
+            RespawnManager.Instance.SetRespawnPoint(transform.position);
             RespawnManager.Instance.sortingLayer = sortingLayer;
         }
     }
