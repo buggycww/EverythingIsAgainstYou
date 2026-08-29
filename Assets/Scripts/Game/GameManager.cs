@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!canRestart)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Restart();
@@ -31,7 +36,11 @@ public class GameManager : MonoBehaviour
 
     private void Restart()
     {
-        RespawnManager.Instance.RespawnPosition = player.transform.position;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

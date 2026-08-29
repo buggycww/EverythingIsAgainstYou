@@ -159,8 +159,5 @@ public class Trader : NPC
     public override void HandleDialogueComplete()
     {
         base.HandleDialogueComplete();
-
-        isInteracting = false;
-        playerController.enabled = true;
     }
 }

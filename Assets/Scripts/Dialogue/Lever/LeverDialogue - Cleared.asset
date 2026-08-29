@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab95d363a003719488706b6b3495ef52, type: 3}
+  m_Name: LeverDialogue - Cleared
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  Name: Lever
+  Portrait: {fileID: -6992555351708594882, guid: f48b9bb4d768d9f43a42e54c927cad64,
+    type: 3}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 1}
+  dialogueLines:
+  - Damn, I really thought I had you.
+  - What? I never said the gate wouldn't open on its own.
+  autoProgressLines: 0101
+  options: []
+  playerInteractionDialogueLines: []
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05

@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.ProjectAuditor.Editor.Core;
 using UnityEngine;
-
-// test
 
 namespace Cainos.PixelArtTopDown_Basic
 {
@@ -16,32 +13,30 @@ namespace Cainos.PixelArtTopDown_Basic
         private SpriteRenderer spriteRenderer;
         private Vector2 lastDirection = Vector2.down;
         private Color originalColor;
-
-        // Map directions to animation states
-        private enum DirectionState
-        {
-            Idle_Down,
-            Idle_Up,
-            Idle_LeftDown,
-            Idle_LeftUp,
-            Idle_RightDown,
-            Idle_RightUp,
-            Walk_Down,
-            Walk_Up,
-            Walk_LeftDown,
-            Walk_LeftUp,
-            Walk_RightDown,
-            Walk_RightUp
-        }
+        private bool isMovingToLocation;
 
         public bool isDead { get; private set; } = false;
 
+        public event System.Action OnMoveToLocationComplete;
+
         private void Start()
         {
-            transform.position = RespawnManager.Instance.RespawnPosition;
-            Camera.main.transform.position = new Vector3(RespawnManager.Instance.RespawnPosition.x, 
-                RespawnManager.Instance.RespawnPosition.y,
-                    Camera.main.transform.position.z);
+            if (RespawnManager.Instance != null)
+            {
+                transform.position = RespawnManager.Instance.RespawnPosition;
+
+                if (Camera.main != null)
+                {
+                    Camera.main.transform.position = new Vector3(
+                        RespawnManager.Instance.RespawnPosition.x,
+                        RespawnManager.Instance.RespawnPosition.y,
+                        Camera.main.transform.position.z
+                    );
+                }
+
+                SetLayerAndSortingLayer(RespawnManager.Instance.sortingLayer);
+            }
+
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -54,7 +49,7 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void Update()
         {
-            if (isDead)
+            if (isDead || isMovingToLocation)
             {
                 return;
             }
@@ -83,11 +78,26 @@ namespace Cainos.PixelArtTopDown_Basic
             rigidbody.linearVelocity = speed * dir;
         }
 
+        private void SetLayerAndSortingLayer(string sortingLayer)
+        {
+            if (string.IsNullOrEmpty(sortingLayer)) return;
+
+            SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in srs)
+            {
+                sr.sortingLayerName = sortingLayer;
+            }
+        }
+
         public void Stop()
         {
-            rigidbody.linearVelocity = Vector3.zero;
+            if (rigidbody != null)
+                rigidbody.linearVelocity = Vector3.zero;
+
             enabled = false;
-            animator.Play("Idle_Down");
+
+            if (animator != null)
+                animator.Play("Idle_Down");
         }
 
         public void Die()
@@ -96,21 +106,25 @@ namespace Cainos.PixelArtTopDown_Basic
                 return;
 
             isDead = true;
-            rigidbody.linearVelocity = Vector3.zero;
-            animator.Play("Death_Down");
 
-            // Reset color to original before death
+            if (rigidbody != null)
+            {
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.bodyType = RigidbodyType2D.Kinematic;
+            }
+
+            if (animator != null)
+                animator.Play("Death_Down");
+
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
             }
 
-            GameManager.instance.PlayerDead();
+            if (GameManager.instance != null)
+                GameManager.instance.PlayerDead();
         }
 
-        /// <summary>
-        /// Deals damage to the player 5 times with visual feedback, then kills the player.
-        /// </summary>
         public void DamagePlayerAndKill()
         {
             if (isDead) return;
@@ -120,41 +134,31 @@ namespace Cainos.PixelArtTopDown_Basic
         private IEnumerator DamageCoroutine()
         {
             int damageCount = 5;
-            float damageInterval = 0.2f; // Time between each damage instance
-            float flashDuration = 0.1f; // How long each flash lasts
+            float damageInterval = 0.2f;
+            float flashDuration = 0.1f;
 
-            rigidbody.linearVelocity = Vector3.zero;
+            if (rigidbody != null)
+                rigidbody.linearVelocity = Vector3.zero;
 
-            // Store the current facing direction for animation
-            string currentAnim = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-
-            // Play hurt animation if available, otherwise use current
-            if (animator.HasState(0, Animator.StringToHash("Hurt")))
+            if (animator != null && animator.HasState(0, Animator.StringToHash("Hurt")))
             {
                 animator.Play("Hurt");
             }
 
             for (int i = 0; i < damageCount; i++)
             {
-                // Flash red
                 if (spriteRenderer != null)
                 {
                     spriteRenderer.color = Color.red;
                 }
 
-                // Play hurt sound/effect (optional)
-                // AudioManager.Play("PlayerHurt");
-
-                // Wait for flash duration
                 yield return new WaitForSeconds(flashDuration);
 
-                // Return to original color
                 if (spriteRenderer != null)
                 {
                     spriteRenderer.color = originalColor;
                 }
 
-                // Shake effect (optional) - small random displacement
                 Vector3 originalPos = transform.position;
                 transform.position += new Vector3(
                     Random.Range(-0.1f, 0.1f),
@@ -164,19 +168,87 @@ namespace Cainos.PixelArtTopDown_Basic
                 yield return new WaitForSeconds(0.05f);
                 transform.position = originalPos;
 
-                // Wait before next damage instance
                 if (i < damageCount - 1)
                 {
                     yield return new WaitForSeconds(damageInterval);
                 }
             }
 
-            // After all damage instances, kill the player
             Die();
+        }
+
+        /// <summary>
+        /// Moves the player to a target location automatically.
+        /// Player input is disabled during movement.
+        /// </summary>
+        /// <param name="location">The target position to move to</param>
+        public void MoveToLocation(Vector3 location)
+        {
+            if (isMovingToLocation) return;
+            isMovingToLocation = true;
+            StartCoroutine(MoveToLocationRoutine(location));
+        }
+
+        private IEnumerator MoveToLocationRoutine(Vector3 location)
+        {
+            Vector3 startPos = transform.position;
+            Vector2 direction = (location - startPos).normalized;
+
+            lastDirection = direction;
+
+            SetAnimation(direction, true);
+
+            float distance = Vector3.Distance(startPos, location);
+            float moveSpeed = 15f;
+
+            while (Vector3.Distance(transform.position, location) > 0.05f)
+            {
+                Vector3 newPos = Vector3.MoveTowards(transform.position, location, moveSpeed * Time.deltaTime);
+
+                if (rigidbody != null)
+                {
+                    rigidbody.MovePosition(newPos);
+                }
+                else
+                {
+                    transform.position = newPos;
+                }
+
+                Vector2 currentDir = (location - transform.position).normalized;
+                if (currentDir.magnitude > 0.1f)
+                {
+                    SetAnimation(currentDir, true);
+                }
+
+                yield return null;
+            }
+
+            if (rigidbody != null)
+            {
+                rigidbody.MovePosition(location);
+                rigidbody.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                transform.position = location;
+            }
+
+            // Set final animation to Idle_Right (Direction 2)
+            // Since we want Idle_Right, we use a direction of (1, 0)
+            Vector2 idleDirection = Vector2.right;
+            SetAnimation(idleDirection, false);
+            lastDirection = idleDirection;
+
+            yield return new WaitForSeconds(0.1f);
+
+            OnMoveToLocationComplete?.Invoke();
+            gameObject.SetActive(false);
         }
 
         private void SetAnimation(Vector2 dir, bool isMoving)
         {
+            if (animator == null) return;
+
             string stateName = (isMoving ? "Walk_" : "Idle_");
 
             // Determine direction

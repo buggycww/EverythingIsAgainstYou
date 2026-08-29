@@ -15,10 +15,11 @@ MonoBehaviour:
   Name: Sassy Guard
   Portrait: {fileID: -5296191648460617638, guid: e4fcbc2d915a5fb46ae98e2436d8f0b6,
     type: 3}
-  PortraitTint: {r: 1, g: 1, b: 1, a: 0}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 1}
   dialogueLines:
   - 'Ahhhhh!         '
   autoProgressLines: 01
+  options: []
   playerInteractionDialogueLines:
   - 
   voiceSound: {fileID: 0}

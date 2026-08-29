@@ -25,6 +25,7 @@ public class DialogueSystem : MonoBehaviour
     private Coroutine typingCoroutine;
     private string currentLineText;
     private bool isSkipping;
+    private bool hasOptions;
 
     public static event Action OnDialogueComplete;
     public static event Action OnOption1Clicked;
@@ -40,6 +41,8 @@ public class DialogueSystem : MonoBehaviour
 
     public static void StartDialogue(Dialogue dialogue)
     {
+        instance.hasOptions = false;
+
         foreach (var option in instance.options)
         {
             option.gameObject.SetActive(false);
@@ -58,6 +61,7 @@ public class DialogueSystem : MonoBehaviour
 
         if (dialogue.options.Length > 0)
         {
+            instance.hasOptions = true;
             for (int i = 0; i < dialogue.options.Length; i++)
             {
                 instance.options[i].transform.GetComponentInChildren<TMP_Text>().text = dialogue.options[i];
@@ -90,11 +94,15 @@ public class DialogueSystem : MonoBehaviour
             isSkipping = false;
         }
 
-        if (dialogueQueue.Count == 0)
+        if (dialogueQueue.Count == 0 && !hasOptions)
         {
             instance.animator.Play("SlideOut");
             isDialogueActive = false;
             OnDialogueComplete?.Invoke();
+            return;
+        }
+        else if (dialogueQueue.Count == 0 && hasOptions)
+        {
             return;
         }
 

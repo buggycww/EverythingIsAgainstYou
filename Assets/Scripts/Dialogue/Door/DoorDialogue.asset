@@ -17,7 +17,7 @@ MonoBehaviour:
   PortraitTint: {r: 1, g: 1, b: 1, a: 1}
   dialogueLines:
   - It's locked. Maybe I can find a key somewhere...
-  autoProgressLines: 00
+  autoProgressLines: 01
   options: []
   playerInteractionDialogueLines:
   - It's locked. Maybe I can find a key somewhere...

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: FlowerMonsterDialogue
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   Name: Innocuous Flower
-  Portrait: {fileID: -5158334040586423688, guid: a94142ca3256a0948a74e7f8eaee69e4,
-    type: 3}
-  PortraitTint: {r: 1, g: 1, b: 1, a: 0}
+  Portrait: {fileID: 2063098012, guid: 9d308c0a6ed5c7249adce51f2d72aa04, type: 3}
+  PortraitTint: {r: 1, g: 1, b: 1, a: 1}
   dialogueLines:
   - Yum ~~~
   autoProgressLines: 01
+  options: []
   playerInteractionDialogueLines: []
   voiceSound: {fileID: 0}
   voicePitch: 1
