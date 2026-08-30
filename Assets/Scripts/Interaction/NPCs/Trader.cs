@@ -194,7 +194,7 @@ public class Trader : NPC
         {
             Debug.LogWarning("Animator is not available");
         }
-        StartCoroutine(KillPlayerAfterDelay(playerController, 0.3f, playerController?.gameObject));
+        StartCoroutine(KillPlayerAfterDelay(playerController, 0.2f, playerController?.gameObject));
     }
 
     private IEnumerator KillPlayerAfterDelay(PlayerController controller, float delay, GameObject interactor)

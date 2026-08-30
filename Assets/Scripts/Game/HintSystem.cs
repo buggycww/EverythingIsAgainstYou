@@ -84,7 +84,7 @@ public class HintSystem : MonoBehaviour
 
     public void CheckHintDisplay(int count)
     {
-        if (count > 5)
+        if (count > 4)
         {
             button.SetActive(true);
         }

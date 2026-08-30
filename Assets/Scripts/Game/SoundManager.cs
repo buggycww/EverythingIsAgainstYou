@@ -6,7 +6,7 @@ public class SoundClip
 {
     public string name;
     public AudioClip clip;
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     public float volume = 1f;
     [Range(-3f, 3f)]
     public float pitch = 1f;
@@ -21,32 +21,37 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource voiceSource;
 
     [Header("Audio Clips")]
     [SerializeField] private SoundClip[] musicClips;
     [SerializeField] private SoundClip[] sfxClips;
 
     [Header("Settings")]
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     [SerializeField] private float masterVolume = 1f;
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     [SerializeField] private float musicVolume = 0.5f;
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     [SerializeField] private float sfxVolume = 1f;
+    [Range(0f, 3f)]
+    [SerializeField] private float voiceVolume = 1f;
 
     private Dictionary<string, SoundClip> musicDictionary = new Dictionary<string, SoundClip>();
     private Dictionary<string, SoundClip> sfxDictionary = new Dictionary<string, SoundClip>();
+    private Dictionary<string, SoundClip> voiceDictionary = new Dictionary<string, SoundClip>();
 
-    // Cache audio sources for pooling (optional)
+    // Pool for AudioSource GameObjects (children)
     private Queue<AudioSource> sfxPool = new Queue<AudioSource>();
     [SerializeField] private int poolSize = 10;
+    [SerializeField] private GameObject audioSourcePrefab; // Optional: prefab for pooled sources
 
     private void Awake()
     {
         // Force enable the GameObject and component
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
-    
+
         if (!enabled)
             enabled = true;
 
@@ -77,15 +82,15 @@ public class SoundManager : MonoBehaviour
             sfxSource.playOnAwake = false;
         }
 
-        // Initialize SFX pool
-        for (int i = 0; i < poolSize; i++)
+        if (voiceSource == null)
         {
-            AudioSource source = gameObject.AddComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.loop = false;
-            source.gameObject.SetActive(false);
-            sfxPool.Enqueue(source);
+            voiceSource = gameObject.AddComponent<AudioSource>();
+            voiceSource.loop = false;
+            voiceSource.playOnAwake = false;
         }
+
+        // Initialize SFX pool with CHILD GameObjects
+        InitializeSFXPool();
 
         // Build dictionaries
         BuildMusicDictionary();
@@ -93,15 +98,69 @@ public class SoundManager : MonoBehaviour
 
         // Apply volumes
         UpdateVolumes();
+
+        Debug.Log("SoundManager initialized successfully!");
     }
 
-    private void Start()
+    #region Pool Initialization
+    private void InitializeSFXPool()
     {
-        Debug.Log($"SoundManager - GameObject Active: {gameObject.activeSelf}");
-        Debug.Log($"SoundManager - Component Enabled: {enabled}");
-        Debug.Log($"SoundManager - MusicSource Active: {(musicSource != null ? musicSource.gameObject.activeSelf.ToString() : "null")}");
-        Debug.Log($"SoundManager - SFXSource Active: {(sfxSource != null ? sfxSource.gameObject.activeSelf.ToString() : "null")}");
+        // Create a parent object for pooled sources to keep hierarchy clean
+        GameObject poolParent = new GameObject("SFX Pool");
+        poolParent.transform.SetParent(transform);
+        poolParent.transform.localPosition = Vector3.zero;
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            // Create a child GameObject for each pooled source
+            GameObject sourceGO = new GameObject($"PooledSource_{i}");
+            sourceGO.transform.SetParent(poolParent.transform);
+            sourceGO.transform.localPosition = Vector3.zero;
+
+            // Add AudioSource component
+            AudioSource source = sourceGO.AddComponent<AudioSource>();
+            source.playOnAwake = false;
+            source.loop = false;
+
+            // Initially deactivate the child GameObject (NOT the parent SoundManager)
+            sourceGO.SetActive(false);
+
+            sfxPool.Enqueue(source);
+        }
     }
+
+    // Alternative: Use a prefab for pooled sources
+    private void InitializeSFXPoolWithPrefab()
+    {
+        if (audioSourcePrefab == null)
+        {
+            // Fallback to creating GameObjects
+            InitializeSFXPool();
+            return;
+        }
+
+        GameObject poolParent = new GameObject("SFX Pool");
+        poolParent.transform.SetParent(transform);
+        poolParent.transform.localPosition = Vector3.zero;
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject sourceGO = Instantiate(audioSourcePrefab, poolParent.transform);
+            sourceGO.name = $"PooledSource_{i}";
+            sourceGO.transform.localPosition = Vector3.zero;
+
+            AudioSource source = sourceGO.GetComponent<AudioSource>();
+            if (source == null)
+                source = sourceGO.AddComponent<AudioSource>();
+
+            source.playOnAwake = false;
+            source.loop = false;
+
+            sourceGO.SetActive(false);
+            sfxPool.Enqueue(source);
+        }
+    }
+    #endregion
 
     #region Dictionary Building
     private void BuildMusicDictionary()
@@ -161,11 +220,11 @@ public class SoundManager : MonoBehaviour
 
         if (sfxSource != null)
             sfxSource.volume = sfxVolume * masterVolume;
+
+        if (voiceSource != null)
+            voiceSource.volume = voiceVolume * masterVolume; 
     }
 
-    public float GetMasterVolume() => masterVolume;
-    public float GetMusicVolume() => musicVolume;
-    public float GetSFXVolume() => sfxVolume;
     #endregion
 
     #region Music Methods
@@ -191,7 +250,6 @@ public class SoundManager : MonoBehaviour
 
         if (musicSource == null) return;
 
-        // Apply clip settings
         musicSource.clip = sound.clip;
         musicSource.loop = sound.loop;
         musicSource.pitch = sound.pitch;
@@ -251,7 +309,7 @@ public class SoundManager : MonoBehaviour
     {
         if (sfxDictionary.TryGetValue(clipName, out SoundClip sound))
         {
-            PlaySFX(sound);
+            PlaySFXPooled(sound);
         }
         else
         {
@@ -263,7 +321,6 @@ public class SoundManager : MonoBehaviour
     {
         if (sound == null || sound.clip == null || sfxSource == null) return;
 
-        // Use the main SFX source for one-shot
         sfxSource.pitch = sound.pitch;
         sfxSource.PlayOneShot(sound.clip, sound.volume * sfxVolume * masterVolume);
     }
@@ -336,6 +393,8 @@ public class SoundManager : MonoBehaviour
             source.volume = sound.volume * sfxVolume * masterVolume;
             source.pitch = sound.pitch;
             source.loop = sound.loop;
+
+            // Activate the child GameObject (NOT the SoundManager)
             source.gameObject.SetActive(true);
             source.Play();
 
@@ -370,13 +429,26 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    #region Voice Methods
+    public void PlayVoice(AudioClip audioClip, float pitch = 1f)
+    {
+        voiceSource.pitch = pitch;
+        voiceSource.PlayOneShot(audioClip);
+    }
+    #endregion
+
     #region Pool Management
     private AudioSource GetPooledSource()
     {
         if (sfxPool.Count == 0) return null;
 
         AudioSource source = sfxPool.Dequeue();
-        source.gameObject.SetActive(true);
+        // Ensure the source's GameObject is a child, not the main GameObject
+        if (source.gameObject == gameObject)
+        {
+            Debug.LogError("Pooled source is on the SoundManager GameObject! This will disable the SoundManager.");
+            return null;
+        }
         sfxPool.Enqueue(source);
         return source;
     }
@@ -384,21 +456,26 @@ public class SoundManager : MonoBehaviour
     private System.Collections.IEnumerator ReturnSourceToPool(AudioSource source, float delay)
     {
         yield return new WaitForSeconds(delay);
-        source.Stop();
-        source.clip = null;
-        source.gameObject.SetActive(false);
-    }
 
-    // Reset pool (call when scene changes if needed)
-    public void ResetPool()
-    {
-        StopAllPooledSFX();
-        // Ensure all sources are deactivated
-        foreach (var source in sfxPool)
+        if (source != null && source.gameObject != null)
         {
             source.Stop();
             source.clip = null;
             source.gameObject.SetActive(false);
+        }
+    }
+
+    public void ResetPool()
+    {
+        StopAllPooledSFX();
+        foreach (var source in sfxPool)
+        {
+            if (source != null && source.gameObject != null)
+            {
+                source.Stop();
+                source.clip = null;
+                source.gameObject.SetActive(false);
+            }
         }
     }
     #endregion
@@ -408,7 +485,6 @@ public class SoundManager : MonoBehaviour
     {
         if (musicSource == null) yield break;
 
-        // Fade out current music
         float startVolume = musicSource.volume;
         float elapsed = 0f;
 
@@ -420,11 +496,9 @@ public class SoundManager : MonoBehaviour
             yield return null;
         }
 
-        // Switch clip
         musicSource.clip = clip;
         musicSource.Play();
 
-        // Fade in new music
         elapsed = 0f;
         while (elapsed < duration / 2f)
         {

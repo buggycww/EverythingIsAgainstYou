@@ -37,8 +37,15 @@ public class WickedWind : BaseInteractable
 
     private void Update()
     {
-        if (!isPlayerInRange || playerRb == null)
+        if (!isPlayerInRange || playerRb == null || (playerController != null && playerController.isDead))
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
             return;
+        }
+
 
         // Get player input
         Vector2 input = GetPlayerInput();
@@ -60,6 +67,9 @@ public class WickedWind : BaseInteractable
 
     private void UpdateWind(Vector2 direction)
     {
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+
         // If direction changed, update visuals
         if (direction != currentWindDirection)
         {
@@ -186,11 +196,15 @@ public class WickedWind : BaseInteractable
     #region Public Methods
     public void KilledPlayer()
     {
-        Debug.Log("not Player Touched Wind");
-        if (hasPlayerTouchedWind)
+        if (!hasPlayerTouchedWind) return;
+
+        if (DialogueSystem.Instance != null)
         {
-            Debug.Log("Player Touched Wind");
             DialogueSystem.StartDialogue(dialogues[killedPlayerIndex]);
+        }
+        else
+        {
+            Debug.LogWarning("DialogueSystem.Instance is null - cannot start dialogue!");
         }
     }
 

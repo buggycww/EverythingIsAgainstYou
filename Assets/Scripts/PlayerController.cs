@@ -22,6 +22,15 @@ namespace Cainos.PixelArtTopDown_Basic
 
         public event System.Action OnMoveToLocationComplete;
 
+        [Header("Walking Sounds")]
+        [SerializeField] private AudioClip[] walkingAudioClips;
+        [SerializeField] private float walkSoundInterval = 0.3f;
+        [SerializeField] private float walkSoundVolume = 0.5f;
+
+        private AudioSource audioSource;
+        private float walkSoundTimer = 0f;
+        private bool wasMoving = false;
+
         private void Start()
         {
             if (RespawnManager.Instance != null)
@@ -43,6 +52,15 @@ namespace Cainos.PixelArtTopDown_Basic
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+
+            // Setup audio source
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
 
             if (spriteRenderer != null)
             {
@@ -80,10 +98,13 @@ namespace Cainos.PixelArtTopDown_Basic
             {
                 lastDirection = dir;
                 SetAnimation(dir, true);
+                PlayWalkingSound();
             }
             else
             {
                 SetAnimation(lastDirection, false);
+                wasMoving = false;
+                walkSoundTimer = 0f;
             }
 
             rigidbody.linearVelocity = speed * dir;
@@ -116,7 +137,52 @@ namespace Cainos.PixelArtTopDown_Basic
             rigidbody.linearVelocity = direction * speed;
 
             SetAnimation(direction, true);
+            PlayWalkingSound();
         }
+
+        #region Walking Sounds
+        private void PlayWalkingSound()
+        {
+            // Reset timer if we weren't moving before
+            if (!wasMoving)
+            {
+                walkSoundTimer = 0f;
+                wasMoving = true;
+            }
+
+            // Update timer
+            walkSoundTimer += Time.deltaTime;
+
+            // Play sound at intervals
+            if (walkSoundTimer >= walkSoundInterval)
+            {
+                walkSoundTimer = 0f;
+
+                if (walkingAudioClips != null && walkingAudioClips.Length > 0)
+                {
+                    // Pick a random clip
+                    AudioClip clip = walkingAudioClips[Random.Range(0, walkingAudioClips.Length)];
+                    if (clip != null && audioSource != null)
+                    {
+                        audioSource.PlayOneShot(clip, walkSoundVolume);
+                    }
+                }
+            }
+        }
+
+        // Public method to play a single footstep (for animation events)
+        public void PlayFootstep()
+        {
+            if (walkingAudioClips != null && walkingAudioClips.Length > 0)
+            {
+                AudioClip clip = walkingAudioClips[Random.Range(0, walkingAudioClips.Length)];
+                if (clip != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(clip, walkSoundVolume);
+                }
+            }
+        }
+        #endregion
 
         private void SetLayerAndSortingLayer(string sortingLayer)
         {
@@ -138,6 +204,10 @@ namespace Cainos.PixelArtTopDown_Basic
 
             if (animator != null)
                 animator.Play("Idle_Down");
+
+            // Reset walking sound state
+            wasMoving = false;
+            walkSoundTimer = 0f;
         }
 
         public void Die()
@@ -147,7 +217,8 @@ namespace Cainos.PixelArtTopDown_Basic
 
             isDead = true;
 
-            SoundManager.Instance.PlaySFX("Die");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("Die");
 
             if (rigidbody != null)
             {
@@ -165,6 +236,12 @@ namespace Cainos.PixelArtTopDown_Basic
 
             if (GameManager.instance != null)
                 GameManager.instance.PlayerDead();
+
+            // Stop walking sounds
+            wasMoving = false;
+            walkSoundTimer = 0f;
+            if (audioSource != null)
+                audioSource.Stop();
         }
 
         public void DamagePlayerAndKill()
@@ -189,7 +266,8 @@ namespace Cainos.PixelArtTopDown_Basic
 
             for (int i = 0; i < damageCount; i++)
             {
-                SoundManager.Instance.PlaySFX("TraderCurse");
+                if (SoundManager.Instance != null)
+                    SoundManager.Instance.PlaySFX("TraderCurse");
 
                 if (spriteRenderer != null)
                 {
@@ -237,6 +315,10 @@ namespace Cainos.PixelArtTopDown_Basic
             Vector2 direction = (location - transform.position).normalized;
             lastDirection = direction;
             SetAnimation(direction, true);
+
+            // Reset walking sound state for new movement
+            wasMoving = false;
+            walkSoundTimer = 0f;
         }
 
         private IEnumerator MoveToLocationRoutine(Vector3 location)
@@ -262,6 +344,12 @@ namespace Cainos.PixelArtTopDown_Basic
             // Stop moving
             isMovingToLocation = false;
             moveToLocationStarted = false;
+
+            // Stop walking sounds
+            wasMoving = false;
+            walkSoundTimer = 0f;
+            if (audioSource != null)
+                audioSource.Stop();
 
             // Set final animation to Idle_Right
             Vector2 idleDirection = Vector2.right;
@@ -305,11 +393,11 @@ namespace Cainos.PixelArtTopDown_Basic
             else // Horizontal only
             {
                 if (dir.x > 0.1f)
-                    stateName += "RightDown"; // Default right
+                    stateName += "RightDown";
                 else if (dir.x < -0.1f)
-                    stateName += "LeftDown"; // Default left
+                    stateName += "LeftDown";
                 else
-                    stateName += "Down"; // Fallback
+                    stateName += "Down";
             }
 
             animator.Play(stateName);

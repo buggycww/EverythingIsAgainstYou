@@ -20,22 +20,27 @@ public class RespawnManager : MonoBehaviour
 
     private void Awake()
     {
+        player = FindAnyObjectByType<PlayerController>().transform;
+
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SoundManager.Instance.PlayMusic("Game");
-
-            if (player != null)
-            {
-                SetRespawnPoint(player.position);
-                Instance.sortingLayer = player.GetComponent<SpriteRenderer>().sortingLayerName;
-            }
         }
 
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (player != null)
+        {
+            SetRespawnPoint(player.position);
+            Instance.sortingLayer = player.GetComponent<SpriteRenderer>().sortingLayerName;
         }
     }
 
@@ -56,6 +61,7 @@ public class RespawnManager : MonoBehaviour
             DestroySelf();
         }
 
+        player = FindAnyObjectByType<PlayerController>().transform;
         incrementCounter();
     }
 

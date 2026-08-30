@@ -22,7 +22,7 @@ MonoBehaviour:
   options: []
   playerInteractionDialogueLines:
   - 
-  voiceSound: {fileID: 0}
+  voiceSound: {fileID: 8300000, guid: b8b528137bfa056439a21a9745bff825, type: 3}
   voicePitch: 1
   autoProgressDelay: 1.5
-  typingSpeed: 0.05
+  typingSpeed: 0.07

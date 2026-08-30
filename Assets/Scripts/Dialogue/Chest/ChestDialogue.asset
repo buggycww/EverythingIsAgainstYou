@@ -16,11 +16,12 @@ MonoBehaviour:
   Portrait: {fileID: 21300000, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   PortraitTint: {r: 1, g: 1, b: 1, a: 1}
   dialogueLines:
-  - Boohoo, no treasure for you.
+  - Dumbass, did you think you found treasure? Boohoo, nothing for the big, brave
+    adventurer!
   autoProgressLines: 01
   options: []
   playerInteractionDialogueLines: []
   voiceSound: {fileID: 0}
   voicePitch: 1
   autoProgressDelay: 1.5
-  typingSpeed: 0.05
+  typingSpeed: 0.07

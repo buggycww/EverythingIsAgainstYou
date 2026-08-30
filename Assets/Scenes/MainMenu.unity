@@ -13564,8 +13564,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -700.2, y: 185.2}
-  m_SizeDelta: {x: 800, y: 200}
+  m_AnchoredPosition: {x: -547.5, y: 254}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332819900
 MonoBehaviour:
@@ -13574,7 +13574,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332819898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -13627,8 +13627,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.6627451, g: 1, b: 0.9732241, a: 1}
+    m_PressedColor: {r: 0.24170314, g: 0.5052121, b: 0.63522005, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -13645,7 +13645,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 332819900}
+  m_TargetGraphic: {fileID: 1602050033}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -18407,6 +18407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
+  voiceSource: {fileID: 0}
   musicClips:
   - name: MainMenu
     clip: {fileID: 8300000, guid: 9aafe2507669d7d4a9be14862db4895b, type: 3}
@@ -18416,7 +18417,7 @@ MonoBehaviour:
     playOnAwake: 0
   - name: Game
     clip: {fileID: 8300000, guid: 33a85d9f9999daa45826f400d51f1195, type: 3}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     loop: 0
     playOnAwake: 0
@@ -18428,8 +18429,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
   - name: Hover
-    clip: {fileID: 8300000, guid: 558d289a59dc2e44cb78d09e7dea1f77, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 83ddbea50dfed6347b5954008dbd22d4, type: 3}
+    volume: 3
     pitch: 1
     loop: 0
     playOnAwake: 0
@@ -18523,10 +18524,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
+  - name: Voice6
+    clip: {fileID: 8300000, guid: a181b2de59e10124e85ae7513510f148, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
   masterVolume: 1
   musicVolume: 0.5
   sfxVolume: 1
+  voiceVolume: 1
   poolSize: 10
+  audioSourcePrefab: {fileID: 0}
 --- !u!4 &535479982
 Transform:
   m_ObjectHideFlags: 0
@@ -20024,8 +20033,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287265859
-  m_fontColor: {r: 0.26363668, g: 0.48683918, b: 0.54088044, a: 1}
+    rgba: 4293911732
+  m_fontColor: {r: 0.7043035, g: 0.8934562, b: 0.93710685, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -20042,14 +20051,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 170
+  m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -30335,8 +30344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -700.2, y: -77}
-  m_SizeDelta: {x: 800, y: 200}
+  m_AnchoredPosition: {x: -547.5, y: -81.19998}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482955522
 MonoBehaviour:
@@ -30360,8 +30369,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.6627451, g: 1, b: 0.9732241, a: 1}
+    m_PressedColor: {r: 0.24170314, g: 0.5052121, b: 0.63522005, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -30378,7 +30387,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1482955523}
+  m_TargetGraphic: {fileID: 662511739}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -30401,7 +30410,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482955520}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -32127,8 +32136,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287265859
-  m_fontColor: {r: 0.26363668, g: 0.48683918, b: 0.54088044, a: 1}
+    rgba: 4293911732
+  m_fontColor: {r: 0.7043035, g: 0.8934562, b: 0.93710685, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -32145,14 +32154,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 170
+  m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

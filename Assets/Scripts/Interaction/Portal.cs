@@ -1,4 +1,5 @@
 using Cainos.PixelArtTopDown_Basic;
+using System.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Events;
@@ -62,6 +63,12 @@ public class Portal : MonoBehaviour
     public void DisablePortal()
     {
         transform.GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(TurnVisualOffAfterDealy());
+    }
+
+    private IEnumerator TurnVisualOffAfterDealy()
+    {
+        yield return new WaitForSeconds(1f);
         transform.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

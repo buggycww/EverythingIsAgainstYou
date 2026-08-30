@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
+    // Public static Instance for access from other scripts
+    public static DialogueSystem Instance { get; private set; }
+
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image portrait;
@@ -16,8 +20,8 @@ public class DialogueSystem : MonoBehaviour
 
     [Header("Dialogue Settings")]
     [SerializeField] private float typeSpeed = 0.05f;
+    [SerializeField] private AudioClip defaultVoice;
 
-    private static DialogueSystem instance;
     private Queue<string> dialogueQueue;
     private Queue<bool> autoProgressLines;
     private bool isDialogueActive;
@@ -31,50 +35,119 @@ public class DialogueSystem : MonoBehaviour
     public static event Action OnOption1Clicked;
     public static event Action OnOption2Clicked;
 
+    private AudioClip currentAudioClip;
+    private float currentPitch;
+
     private void Awake()
     {
-        instance = this;
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         dialogueQueue = new Queue<string>();
         autoProgressLines = new Queue<bool>();
+
+        // Get animator if not assigned
+        if (animator == null && dialoguePanel != null)
+        {
+            animator = dialoguePanel.GetComponent<Animator>();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+
+        // Clean up events
+        OnDialogueComplete = null;
+        OnOption1Clicked = null;
+        OnOption2Clicked = null;
     }
 
     public static void StartDialogue(Dialogue dialogue)
     {
-        instance.hasOptions = false;
-
-        foreach (var option in instance.options)
+        // Null check for Instance
+        if (Instance == null)
         {
-            option.gameObject.SetActive(false);
+            Debug.LogError("DialogueSystem Instance is null! Cannot start dialogue.");
+            return;
         }
 
-        instance.animator.Play("SlideIn");
+        if (dialogue == null)
+        {
+            Debug.LogError("Dialogue is null! Cannot start dialogue.");
+            return;
+        }
 
-        instance.dialogueQueue.Clear();
-        instance.autoProgressLines.Clear();
+        Instance.hasOptions = false;
+
+        foreach (var option in Instance.options)
+        {
+            if (option != null)
+                option.gameObject.SetActive(false);
+        }
+
+        if (Instance.animator != null)
+            Instance.animator.Play("SlideIn");
+        else
+            Debug.LogWarning("DialogueSystem animator is null!");
+
+        Instance.dialogueQueue.Clear();
+        Instance.autoProgressLines.Clear();
 
         for (int i = 0; i < dialogue.dialogueLines.Length; i++)
         {
-            instance.dialogueQueue.Enqueue(dialogue.dialogueLines[i]);
-            instance.autoProgressLines.Enqueue(dialogue.autoProgressLines[i]);
+            Instance.dialogueQueue.Enqueue(dialogue.dialogueLines[i]);
+            Instance.autoProgressLines.Enqueue(dialogue.autoProgressLines[i]);
         }
 
         if (dialogue.options.Length > 0)
         {
-            instance.hasOptions = true;
+            Instance.hasOptions = true;
             for (int i = 0; i < dialogue.options.Length; i++)
             {
-                instance.options[i].transform.GetComponentInChildren<TMP_Text>().text = dialogue.options[i];
-                instance.options[i].gameObject.SetActive(true);
+                if (i < Instance.options.Length && Instance.options[i] != null)
+                {
+                    var textComponent = Instance.options[i].GetComponentInChildren<TMP_Text>();
+                    if (textComponent != null)
+                        textComponent.text = dialogue.options[i];
+                    Instance.options[i].gameObject.SetActive(true);
+                }
             }
         }
 
-        instance.portrait.sprite = dialogue.Portrait;
-        instance.portrait.color = dialogue.PortraitTint;
-        instance.typeSpeed = dialogue.typingSpeed;
-        instance.ShowNextLine();
+        if (Instance.portrait != null)
+        {
+            Instance.portrait.sprite = dialogue.Portrait;
+            Instance.portrait.color = dialogue.PortraitTint;
+        }
 
-        instance.isDialogueActive = true;
-        instance.isSkipping = false;
+        Instance.typeSpeed = dialogue.typingSpeed;
+
+        if (dialogue.voiceSound != null)
+        {
+            Instance.currentAudioClip = dialogue.voiceSound;
+        }
+        else
+        {
+            Instance.currentAudioClip = Instance.defaultVoice;
+        }
+
+        Instance.currentPitch = dialogue.voicePitch;
+        Instance.ShowNextLine();
+
+        Instance.isDialogueActive = true;
+        Instance.isSkipping = false;
     }
 
     public void ShowNextLine()
@@ -89,13 +162,15 @@ public class DialogueSystem : MonoBehaviour
         // If there was a skipped line, make sure we show the full text
         if (isSkipping && !string.IsNullOrEmpty(currentLineText))
         {
-            dialogueText.text = currentLineText;
+            if (dialogueText != null)
+                dialogueText.text = currentLineText;
             isSkipping = false;
         }
 
         if (dialogueQueue.Count == 0 && !hasOptions)
         {
-            instance.animator.Play("SlideOut");
+            if (animator != null)
+                animator.Play("SlideOut");
             isDialogueActive = false;
             OnDialogueComplete?.Invoke();
             return;
@@ -115,7 +190,9 @@ public class DialogueSystem : MonoBehaviour
         isTyping = true;
         isSkipping = false;
         currentLineText = text;
-        dialogueText.text = "";
+
+        if (dialogueText != null)
+            dialogueText.text = "";
 
         foreach (char c in text)
         {
@@ -123,7 +200,8 @@ public class DialogueSystem : MonoBehaviour
             if (isSkipping)
             {
                 // Skip to the end of the line
-                dialogueText.text = text;
+                if (dialogueText != null)
+                    dialogueText.text = text;
                 isTyping = false;
                 isSkipping = false;
                 currentLineText = "";
@@ -137,7 +215,13 @@ public class DialogueSystem : MonoBehaviour
                 yield break;
             }
 
-            dialogueText.text += c;
+            if (currentAudioClip != null)
+            {
+                SoundManager.Instance.PlayVoice(currentAudioClip, currentPitch);
+            }
+
+            if (dialogueText != null)
+                dialogueText.text += c;
             yield return new WaitForSeconds(typeSpeed);
         }
 
@@ -160,12 +244,10 @@ public class DialogueSystem : MonoBehaviour
         {
             if (isTyping)
             {
-                // Skip the current typing animation
                 isSkipping = true;
             }
             else
             {
-                // Go to next line if not typing
                 ShowNextLine();
             }
         }
@@ -174,7 +256,8 @@ public class DialogueSystem : MonoBehaviour
     public void Option1Clicked()
     {
         OnOption1Clicked?.Invoke();
-        instance.animator.Play("SlideOut");
+        if (animator != null)
+            animator.Play("SlideOut");
         isDialogueActive = false;
 
         // Stop any ongoing typing
@@ -192,7 +275,8 @@ public class DialogueSystem : MonoBehaviour
     public void Option2Clicked()
     {
         OnOption2Clicked?.Invoke();
-        instance.animator.Play("SlideOut");
+        if (animator != null)
+            animator.Play("SlideOut");
         isDialogueActive = false;
 
         // Stop any ongoing typing
@@ -202,7 +286,7 @@ public class DialogueSystem : MonoBehaviour
             typingCoroutine = null;
         }
 
-        OnDialogueComplete?.Invoke(); 
+        OnDialogueComplete?.Invoke();
         OnOption1Clicked = null;
         OnOption2Clicked = null;
     }

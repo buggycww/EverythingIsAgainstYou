@@ -1,3 +1,4 @@
+using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
 
 public class Lever : BaseInteractable
@@ -20,6 +21,9 @@ public class Lever : BaseInteractable
 
     private void ActivateTrap(GameObject player)
     {
+        var playerController = player.GetComponent<PlayerController>();
+        playerController.Stop();
+        playerController.enabled = false;
         transform.GetComponent<SpriteRenderer>().sprite = pulledIcon;
         int trapIndex = Random.Range(0, traps.Length);
         traps[trapIndex].transform.position = player.transform.position;

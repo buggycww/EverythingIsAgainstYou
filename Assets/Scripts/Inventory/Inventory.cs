@@ -16,7 +16,6 @@ public class Inventory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: Keep inventory across scenes
         }
         else
         {
