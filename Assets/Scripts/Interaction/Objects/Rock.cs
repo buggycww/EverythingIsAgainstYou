@@ -50,6 +50,7 @@ public class Rock : BaseInteractable
 
         playerController = interactor.GetComponent<PlayerController>();
         followPlayer = true;
+        ResetTag();
         HideInteractionPrompt();
         StartCoroutine(RockFall());
     }
@@ -66,5 +67,10 @@ public class Rock : BaseInteractable
 
         playerController.Die();
         DialogueSystem.StartDialogue(dialogues[moreFertilizerDialogueIndex]);
+    }
+
+    private void ResetTag()
+    {
+        gameObject.tag = "Untagged";
     }
 }
