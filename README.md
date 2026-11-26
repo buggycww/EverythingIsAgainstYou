@@ -8,7 +8,7 @@ A 2D survival game made in Unity for Brackeys Game Jam 2026.2. The jam theme was
 
 This was my first 2D game project. It was built during the jam timeframe, so some systems are rough and a few known issues remain.
 
-Try it out for free on [itch.io](https://buggycww.itch.io/everything-is-against-you).
+Try it out for free on [itch.io](https://buggycww.itch.io/everything-is-against-you)!
 
 ## Controls
 
